@@ -5,6 +5,7 @@ int stack_size = 0;
 char buffer[BUF_SIZE * 8];
 stack_t *stack = NULL;
 
+
 int main(int argc, char **argv)
 {
 	ssize_t size;
@@ -13,24 +14,17 @@ int main(int argc, char **argv)
 	unsigned int element;
 
 	if (argc != 2)
-	{
-		fprintf(stderr, "USAGE: monty file");
-		exit(EXIT_FAILURE);
-	}
+		printError("USAGE: monty file");
 	size = read_textfile(argv[1], MAX);
-	if (size == -1)
-	{
-		fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
-		exit(EXIT_FAILURE);
-	}
+	if (size == 0)
+		printError("Error: Can't open file %s", argv[1]);
 	token = strtok(buffer, " \t\n");
 	while (token != NULL)
 	{
 		value = strtok(NULL, " \t\n");
 		if (is_available(token) == -1)
 		{
-			fprintf(stderr ,"L%d: unknown instruction %s\n", line, token);
-			exit(EXIT_FAILURE);
+			printError("L%d: unknown instruction %s\n", line, token);
 		}
 		element = checkIfNum(value, line, token);
 		getFunction(token)(&stack, element);

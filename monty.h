@@ -44,6 +44,7 @@ typedef struct instruction_s
 	char *opcode;
 	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
+void printError(char *message, ...);
 ssize_t read_textfile(const char *filename, size_t letters);
 int is_available(char *action);
 unsigned int checkIfNum(char *value, int line ,  char  *action);
