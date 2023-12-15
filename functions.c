@@ -53,26 +53,29 @@ void (*getFunction(char *choice))(stack_t **, unsigned int)
 /**
  * checkIfNum - Checks if a string represents a valid number
  * @value: String to check
- *
+ * @line: file line
+ * @action: stack operation
  * Return: 0 if the string is a valid number, otherwise exit with failure
  */
-int checkIfNum(char *value, int line)
+unsigned int checkIfNum(char *value, int line, char  *action)
 {
-	if (value)
+	unsigned int element = 0;
+
+	if (value && strcmp(action, "pall") != 0)
 	{
 		element = atoi(value ? value : NULL);
 		if (element == 0)
 		{
-			printf("L%d: usage: push integer\n", line);
+			fprintf(stderr, "L%d: usage: push integer\n", line);
 			exit(EXIT_FAILURE);
 		}
 	}
-	else 
+	else if (!value && strcmp(action, "pall") != 0)
 	{
-		printf("L%d: usage: push integer\n", line);
+		fprintf(stderr, "L%d: usage: push integer\n", line);
 		exit(EXIT_FAILURE);
 	}
-	return (0);
+	return (element);
 }
 
 /**

@@ -6,7 +6,7 @@
 #define BUF_SIZE 1024
 extern char buffer[BUF_SIZE * 8];
 extern unsigned int element;
-
+extern int stack_size;
 
 #include <errno.h>
 #include <fcntl.h>
@@ -46,7 +46,7 @@ typedef struct instruction_s
 } instruction_t;
 ssize_t read_textfile(const char *filename, size_t letters);
 int is_available(char *action);
-int checkIfNum(char *value, int line);
+unsigned int checkIfNum(char *value, int line ,  char  *action);
 void push(stack_t **stack, unsigned int line_number);
 void pall(stack_t **stack, unsigned int line_number);
 void (*getFunction(char *choice))(stack_t **, unsigned int);
