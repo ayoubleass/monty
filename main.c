@@ -30,7 +30,7 @@ int main(int argc, char **argv)
 			printf("L%d: unknown instruction %s\n", line, token);
 			exit(EXIT_FAILURE);
 		}
-		checkIfNum(value);
+		checkIfNum(value, line);
 		getFunction(token)(&stack, element);
 		token = strtok(NULL, " \t\n");
 		line++;

@@ -56,16 +56,21 @@ void (*getFunction(char *choice))(stack_t **, unsigned int)
  *
  * Return: 0 if the string is a valid number, otherwise exit with failure
  */
-int checkIfNum(char *value)
+int checkIfNum(char *value, int line)
 {
 	if (value)
 	{
 		element = atoi(value ? value : NULL);
 		if (element == 0)
 		{
-			printf("elemeent");
+			printf("L%d: usage: push integer\n", line);
 			exit(EXIT_FAILURE);
 		}
+	}
+	else 
+	{
+		printf("L%d: usage: push integer\n", line);
+		exit(EXIT_FAILURE);
 	}
 	return (0);
 }
