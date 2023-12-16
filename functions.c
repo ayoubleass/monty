@@ -64,19 +64,14 @@ unsigned int checkIfNum(char *value, int line, char  *action)
 {
 	unsigned int element = 0;
 
-	if (value && action && singleParam(action) == -1)
+	if (value == NULL && singleParam(action) == -1)
+		printError("L%d: usage: push integer\n", line);
+
+	if (value && singleParam(action) == -1)
 	{
-		element = atoi(value ? value : NULL);
+		element = atoi(value);
 		if (element == 0)
-		{
-			fprintf(stderr, "L%d: usage: push integer\n", line);
-			exit(EXIT_FAILURE);
-		}
-	}
-	else if (!value && singleParam(action) == -1)
-	{
-		fprintf(stderr, "L%d: usage: push integer\n", line);
-		exit(EXIT_FAILURE);
+			printError("L%d: usage: push integer\n", line);
 	}
 	return (element);
 }
