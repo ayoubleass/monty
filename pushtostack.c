@@ -8,23 +8,15 @@ void push(stack_t **stack, unsigned int line_number)
 {
 	stack_t *new_node = malloc(sizeof(stack_t));
 
-	if (stack_size == LIMIT -1)
-	{
-		fprintf(stderr, "stack overflow");
-		exit(EXIT_FAILURE);
-	}
+	if (stack_size == LIMIT - 1)
+		printError("Stack overflow");
 	if (new_node == NULL)
-	{
-		fprintf(stderr, "Error: malloc failed");
-		exit(EXIT_FAILURE);
-	}
-
+		printError("Error: malloc failed");
 	new_node->n = line_number;
 	new_node->prev = NULL;
-	new_node->next = *stack;
-
 	if (*stack != NULL)
 		(*stack)->prev = new_node;
+	new_node->next = *stack;
 	*stack = new_node;
 	stack_size++;
 }

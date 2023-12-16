@@ -4,7 +4,14 @@
 int stack_size = 0;
 char buffer[BUF_SIZE * 8];
 stack_t *stack = NULL;
-
+/**
+ * main - Entry point for the Monty interpreter program
+ * @argc: Number of command-line arguments
+ * @argv: Array of command-line argument strings
+ * Return: Returns EXIT_SUCCESS upon successful execution. If there are errors
+ * during file handling or instruction execution, appropriate error messages
+ * are printed, and the program exits with EXIT_FAILURE.
+ */
 
 int main(int argc, char **argv)
 {
@@ -23,9 +30,7 @@ int main(int argc, char **argv)
 	{
 		value = strtok(NULL, " \t\n");
 		if (is_available(token) == -1)
-		{
 			printError("L%d: unknown instruction %s\n", line, token);
-		}
 		element = checkIfNum(value, line, token);
 		getFunction(token)(&stack, element);
 		token = strtok(NULL, " \t\n");

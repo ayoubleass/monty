@@ -42,9 +42,7 @@ void (*getFunction(char *choice))(stack_t **, unsigned int)
 	while (ops[i].opcode != NULL)
 	{
 		if (strcmp(choice, ops[i].opcode) == 0)
-		{
 			return (ops[i].f);
-		}
 		i++;
 	}
 	return (NULL);
