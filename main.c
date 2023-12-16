@@ -3,7 +3,6 @@
 
 #define MAX 1024
 int stack_size = 0;
-char *buffer;
 stack_t *stack = NULL;
 /**
  * main - Entry point for the Monty interpreter program
@@ -18,6 +17,7 @@ int main(int argc, char **argv)
 {
 	int line = 1;
 	FILE *fd;
+	char *buffer;
 
 	if (argc != 2)
 		printError("USAGE: monty file");

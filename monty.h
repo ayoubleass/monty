@@ -10,7 +10,7 @@
 #define LIMIT 100
 
 #define BUF_SIZE 1024
-extern char *buffer;
+/*extern char *buffer;*/
 extern unsigned int element;
 extern int stack_size;
 
@@ -52,4 +52,6 @@ void push(stack_t **stack, unsigned int line_number);
 void pall(stack_t **stack, unsigned int line_number);
 void (*getFunction(char *choice))(stack_t **, unsigned int);
 void parse_then_execute(stack_t **stack, int line, char *buffer);
+int singleParam(char *param);
+void pint(stack_t **stack, unsigned int line_number);
 #endif

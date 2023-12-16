@@ -1,6 +1,7 @@
 #include "monty.h"
 #include <stdio.h>
 
+
 /**
  * parse_then_execute - Tokenizes and executes Monty bytecode instructions
  * @stack: A pointer to the top of the stack
@@ -38,6 +39,7 @@ void (*getFunction(char *choice))(stack_t **, unsigned int)
 	instruction_t ops[] = {
 			{"push", push},
 			{"pall", pall},
+			{"pint", pint},
 			{NULL, NULL}
 	};
 	while (ops[i].opcode != NULL)
@@ -60,7 +62,7 @@ unsigned int checkIfNum(char *value, int line, char  *action)
 {
 	unsigned int element = 0;
 
-	if (value && action && strcmp(action, "pall") != 0)
+	if (value && action && singleParam(action) == -1)
 	{
 		element = atoi(value ? value : NULL);
 		if (element == 0)
@@ -69,7 +71,7 @@ unsigned int checkIfNum(char *value, int line, char  *action)
 			exit(EXIT_FAILURE);
 		}
 	}
-	else if (!value && strcmp(action, "pall") != 0)
+	else if (!value && singleParam(action) == -1)
 	{
 		fprintf(stderr, "L%d: usage: push integer\n", line);
 		exit(EXIT_FAILURE);
@@ -89,5 +91,25 @@ int is_available(char *action)
 	strcmp(action, "pall") == 0) {
 		return (1);
 	}
+	if (strcmp(action, "pint") == 0)
+		return (1);
+	return (-1);
+}
+
+/**
+ * singleParam - Check if the given parameter
+ * corresponds to a single-argument instruction
+ * @param: The parameter to check
+ * Return:
+ * Returns 1 if the parameter corresponds to a known
+ * single-argument instruction, -1 otherwise.
+ */
+
+int singleParam(char *param)
+{
+	if (strcmp(param, "pall") == 0)
+		return (1);
+	if (strcmp(param, "pint") == 0)
+		return (1);
 	return (-1);
 }
