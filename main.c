@@ -15,7 +15,7 @@ stack_t *stack = NULL;
 
 int main(int argc, char **argv)
 {
-	int line = 1;
+	unsigned int line = 1;
 	FILE *fd;
 	char *buffer;
 

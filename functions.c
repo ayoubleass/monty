@@ -9,7 +9,7 @@
  * @buffer: A string containing Monty bytecode instructions
  */
 
-void parse_then_execute(stack_t **stack, int line, char *buffer)
+void parse_then_execute(stack_t **stack, unsigned int line, char *buffer)
 {
 	char *token, *value;
 	unsigned int element;
@@ -22,6 +22,8 @@ void parse_then_execute(stack_t **stack, int line, char *buffer)
 		if (is_available(token) == -1)
 			printError("L%d: unknown instruction %s\n", line, token);
 		element = checkIfNum(value, line, token);
+		if (singleParam(token))
+			element = line;
 		getFunction(token)(stack, element);
 		token = strtok(NULL, " \t\n");
 	}

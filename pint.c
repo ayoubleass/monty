@@ -14,8 +14,7 @@ void pint(stack_t **stack, unsigned int line_number)
 {
 	stack_t *cpy = *stack;
 
-	(void) line_number;
 	if (cpy == NULL)
-		printError("L%s: can't pint, stack empty", 1);
+		printError("L%d: can't pint, stack empty", line_number);
 	printf("%d\n", cpy->n);
 }
