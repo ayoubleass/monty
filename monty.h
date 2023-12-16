@@ -1,20 +1,19 @@
 #ifndef STACK_QUEUE
 #define STACK_QUEUE
+#include <errno.h>
+#include <fcntl.h>
+#include <stddef.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
 
 #define LIMIT 100
 
 #define BUF_SIZE 1024
-extern char buffer[BUF_SIZE * 8];
+extern char *buffer;
 extern unsigned int element;
 extern int stack_size;
 
-#include <errno.h>
-#include <fcntl.h>
-#include <stddef.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <unistd.h>
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
  * @n: integer
@@ -44,11 +43,13 @@ typedef struct instruction_s
 	char *opcode;
 	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
+
 void printError(char *message, ...);
 ssize_t read_textfile(const char *filename, size_t letters);
 int is_available(char *action);
-unsigned int checkIfNum(char *value, int line ,  char  *action);
+unsigned int checkIfNum(char *value, int line, char  *action);
 void push(stack_t **stack, unsigned int line_number);
 void pall(stack_t **stack, unsigned int line_number);
 void (*getFunction(char *choice))(stack_t **, unsigned int);
+void parse_then_execute(stack_t **stack, int line, char *buffer);
 #endif

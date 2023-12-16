@@ -1,6 +1,6 @@
 #include "monty.h"
 #include <stdarg.h>
-
+#include <stdio.h>
 /**
  * printError - Print an error message with
  * formatted arguments to stderr and exit.

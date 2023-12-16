@@ -1,28 +1,29 @@
 #include "monty.h"
+#include <stdio.h>
+
 /**
- * read_textfile - Reads a text file and prints it to stdout
- * @filename: Name of the file to read
- * @letters: Number of letters to read and print
- *
- * Return: Number of letters read and printed, or 0 on failure
+ * parse_then_execute - Tokenizes and executes Monty bytecode instructions
+ * @stack: A pointer to the top of the stack
+ * @line: Current line number in the Monty bytecode file
+ * @buffer: A string containing Monty bytecode instructions
  */
 
-ssize_t read_textfile(const char *filename, size_t letters)
+void parse_then_execute(stack_t **stack, int line, char *buffer)
 {
-	int fd;
-	ssize_t size;
+	char *token, *value;
+	unsigned int element;
 
-	if (!filename || !letters)
-	return (0);
-	fd = open(filename, O_RDONLY);
-	if (fd == -1)
-		return (0);
+	token = strtok(buffer, " \t\n");
 
-	size = read(fd, &buffer[0], letters);
-	if (size == -1)
-		return (0);
-	close(fd);
-	return (size);
+	while (token != NULL)
+	{
+		value = strtok(NULL, " \t\n");
+		if (is_available(token) == -1)
+			printError("L%d: unknown instruction %s\n", line, token);
+		element = checkIfNum(value, line, token);
+		getFunction(token)(stack, element);
+		token = strtok(NULL, " \t\n");
+	}
 }
 /**
  * getFunction - Returns a function pointer based on the given choice
@@ -59,7 +60,7 @@ unsigned int checkIfNum(char *value, int line, char  *action)
 {
 	unsigned int element = 0;
 
-	if (value && strcmp(action, "pall") != 0)
+	if (value && action && strcmp(action, "pall") != 0)
 	{
 		element = atoi(value ? value : NULL);
 		if (element == 0)
