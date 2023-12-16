@@ -74,7 +74,9 @@ unsigned int checkIfNum(char *value, int line, char  *action)
 			printError("L%d: usage: push integer\n", line);
 	}
 	else
+	{
 		return (element);
+	}
 }
 
 /**
