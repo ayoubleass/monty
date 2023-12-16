@@ -66,7 +66,7 @@ unsigned int checkIfNum(char *value, int line, char  *action)
 
 	if (!value && singleParam(action) == -1)
 		printError("L%d: usage: push integer\n", line);
-	else if (value && singleParam(action) == -1)
+	if (value && singleParam(action) == -1)
 	{
 		element = atoi(value);
 		if (element == 0)

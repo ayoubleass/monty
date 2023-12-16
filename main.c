@@ -17,16 +17,20 @@ int main(int argc, char **argv)
 {
 	unsigned int line = 1;
 	FILE *fd;
-	char *buffer;
+	char *buffe  = NULLr;
+	size_t n = 0;
+	ssize_t read;
 
 	if (argc != 2)
 		printError("USAGE: monty file");
 	fd = fopen(argv[1], "r");
 	if (!fd)
 		printError("Error: Can't open file %s", argv[1]);
-	buffer = malloc(MAX * sizeof(char));
-	while (fgets(buffer, MAX, fd) != NULL)
+	
+	while (read = getline(buffer, n, fd) != -1)
 	{
+		if (buffer[read - 1] == '\n')
+			buffer[read - 1] = '\0';
 		parse_then_execute(&stack, line, buffer);
 		line++;
 	}
