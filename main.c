@@ -12,12 +12,11 @@ stack_t *stack = NULL;
  * during file handling or instruction execution, appropriate error messages
  * are printed, and the program exits with EXIT_FAILURE.
  */
-
 int main(int argc, char **argv)
 {
 	unsigned int line = 1;
 	FILE *fd;
-	char *buffe  = NULLr;
+	char *buffer = NULL;
 	size_t n = 0;
 	ssize_t read;
 
@@ -26,8 +25,8 @@ int main(int argc, char **argv)
 	fd = fopen(argv[1], "r");
 	if (!fd)
 		printError("Error: Can't open file %s", argv[1]);
-	
-	while (read = getline(buffer, n, fd) != -1)
+
+	while ((read = _getline(&buffer, &n, fd)) != -1)
 	{
 		if (buffer[read - 1] == '\n')
 			buffer[read - 1] = '\0';

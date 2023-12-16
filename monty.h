@@ -6,6 +6,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+#include <stdio.h>
 
 #define LIMIT 100
 
@@ -44,6 +45,7 @@ typedef struct instruction_s
 	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
+size_t _getline(char **lineptr, size_t *n, FILE *stream);
 void printError(char *message, ...);
 ssize_t read_textfile(const char *filename, size_t letters);
 int is_available(char *action);
