@@ -20,7 +20,7 @@ int main(int argc, char **argv)
 	size_t n = 0;
 	ssize_t read;
 
-	if (argc != 2)
+	if (argc < 2 || argc > 2)
 		printError("USAGE: monty file");
 	fd = fopen(argv[1], "r");
 	if (!fd)
